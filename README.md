@@ -21,13 +21,20 @@ Specifically, it allows you to:
 ## Project Structure
 Project Structure
 
+## Project Structure
+
+```text
 calibrai/
+│
 ├── app.py                # Streamlit UI and orchestration
-├── src/
-│   └── models/
-│       └── llm_backend.py # LLM interface (real or mocked)
 ├── requirements.txt
-└── README.md
+├── README.md
+│
+└── src/
+    └── models/
+        └── llm_backend.py  # LLM interface (real)(mocked)
+        └── llm_backend.py  # LLM interface (mocked)
+```
 
 ## app.py (Streamlit UI)
 `app.py` is the main entry point and handles:
