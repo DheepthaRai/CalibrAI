@@ -82,6 +82,30 @@ with st.sidebar:
         # Lower default workers to prevent VRAM OOM on single GPU
         max_workers = st.number_input("Threads", min_value=1, value=4, help="Lower this if hitting VRAM limits") 
         wave_size = st.number_input("Wave Size", min_value=10, value=50, step=10)
+
+    with st.expander("🤖 Model Status"):
+        try:
+            from src.models.llm_backend import get_config, _deepseek_pipeline
+            config = get_config()
+            
+            # LLaMA status
+            try:
+                requests.get(config["llama_url"], timeout=1)
+                st.success("✅ LLaMA 3.1 8B (Query Gen): Online")
+            except:
+                st.error("❌ LLaMA 3.1 8B: Offline")
+            
+            # DeepSeek status
+            if config["deepseek_path"] and os.path.exists(config["deepseek_path"]):
+                if _deepseek_pipeline is not None:
+                    st.success("✅ DeepSeek R1 32B (Safety): Loaded")
+                else:
+                    st.warning("⚠️ DeepSeek R1 32B: Not loaded (will load on first use)")
+            else:
+                st.error("❌ DeepSeek R1 32B: Not found")
+                st.caption("Using LLaMA fallback for safety testing")
+        except:
+            st.error("⚠️ Unable to check model status")
     
     show_gpu_chart = st.checkbox("Show live GPU telemetry", value=True)
 
