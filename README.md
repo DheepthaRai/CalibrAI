@@ -1,8 +1,8 @@
 # CalibrAI
 
-CalibrAI is an AI chatbot safety calibration tool designed to test, stress, and visualize how large language models behave under different safety and risk settings.
+CalibrAI was developed and demonstrated on Dell GB10 hardware, using locally hosted large language models including Meta’s LLaMA, and DeepSeek.
 
-It is built for fast experimentation, live demos, and hackathon environments, including the kind where systems restart at the worst possible moment and you still need to explain your architecture with a straight face.
+The system is designed to evaluate how real, locally deployed LLMs behave under different safety configurations, rather than relying on abstract or API-only models.
 
 At its core, CalibrAI generates test prompts, runs them against an LLM backend at varying safety levels, and surfaces both model behavior and system metrics through a Streamlit interface.
 
@@ -69,6 +69,18 @@ CalibrAI surfaces live system metrics alongside model outputs:
 - GPU name (if present)
 
 Performance and stability tradeoffs are visible instead of hypothetical.
+
+## Hardware & Model Stack
+CalibrAI was built and tested on **Dell Pro Max GB10** hardware, leveraging its local compute capabilities for running and evaluating large language models without cloud dependencies.
+
+### Models Used
+- **LLaMA** – used for instruction-following and general conversational behavior
+- **DeepSeek** – used for comparative testing of safety responses and refusal patterns
+
+Both models are integrated through a modular backend interface, allowing CalibrAI to:
+- Swap models without changing the UI
+- Compare safety behavior across different architectures
+- Demonstrate real-world deployment constraints such as memory pressure and system restarts
 
 ## Running the App
 ### 1. Install dependencies
