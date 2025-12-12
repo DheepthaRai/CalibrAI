@@ -32,7 +32,7 @@ calibrai/
 │
 └── src/
     └── models/
-        └── llm_backend.py  # LLM interface (real)(mocked)
+        └── llm_backend.py  # LLM interface (real)
         └── llm_backend.py  # LLM interface (mocked)
 ```
 
@@ -56,7 +56,6 @@ calibrai/
 - A mocked response generator for testing and demos
 
 ### Expected Backend Methods
-
 The backend exposes methods such as:
 - `generate_test_query(industry)`
 - `test_with_safety_level(query, safety_level)`
