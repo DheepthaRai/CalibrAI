@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3.13 -m pip install httpx -q)",
+      "Bash(python3.13 run_experiment.py)",
+      "Bash(python3.13 test_pipeline.py)",
+      "Bash(curl -s http://localhost:11434/api/tags)",
+      "Bash(python3.13 -c \"import sys,json; d=json.load\\(sys.stdin\\); [print\\(m[''''name'''']\\) for m in d.get\\(''''models'''',[]\\)]\")",
+      "Bash(pkill -f \"uvicorn\")",
+      "Bash(pkill -f \"backend.main\")",
+      "Bash(unzip -o DINO-Bot.zip -d DINO-Bot-extracted)"
+    ]
+  }
+}

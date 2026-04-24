@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.venv/
+*.egg-info/
+calibrai.db
+
+# Node
+frontend/node_modules/
+frontend/dist/
+
+# Env
+.env
+.env.local
+.env.L*
+DINO-Bot-extracted/.env.*
+!DINO-Bot-extracted/.env.example
+
+# OS
+.DS_Store
