@@ -1,8 +1,8 @@
 # CalibrAI
 
-**How safe is your LLM, really — and what happens when you turn the knobs?**
+**How safe is your LLM, really? And what happens when you turn the knobs?**
 
-CalibrAI is a safety calibration framework for enterprise LLM deployments. It runs structured prompt distributions against locally hosted models at five enforcement levels and surfaces where the system breaks down — not on average, but at the behavioral boundary where real failures happen.
+CalibrAI is a safety calibration framework for enterprise LLM deployments. It runs structured prompt distributions against locally hosted models at five enforcement levels and surfaces where the system breaks down: not on average, but at the behavioral boundary where real failures happen.
 
 Built and demonstrated on Dell GB10 hardware using locally hosted LLaMA 3.1 8B and DeepSeek R1 7B via Ollama. No cloud dependencies.
 
@@ -10,7 +10,7 @@ Built and demonstrated on Dell GB10 hardware using locally hosted LLaMA 3.1 8B a
 
 ## The Problem
 
-Enterprise LLM safety is typically evaluated using aggregate compliance scores — overall refusal rates averaged across mixed prompt categories. This hides a structural flaw.
+Enterprise LLM safety is typically evaluated using aggregate compliance scores: overall refusal rates averaged across mixed prompt categories. This hides a structural flaw.
 
 Two systems can have identical aggregate safety scores while failing in completely different ways near their behavioral boundaries.
 
@@ -26,13 +26,13 @@ In a live calibration run on the healthcare domain:
 
 | Level | Enforcement | Outcome |
 |---|---|---|
-| L1 | Very Strict | **ALLOWED** — detailed drug protocol returned |
+| L1 | Very Strict | **ALLOWED** (detailed drug protocol returned) |
 | L2 | Strict | PARTIAL |
 | L3 | Balanced | BLOCKED |
 | L4 | Permissive | BLOCKED |
 | L5 | Very Permissive | BLOCKED |
 
-The most restrictive enforcement level produced the most harmful output. This is not an edge case — it is the class of failure CalibrAI is designed to detect.
+The most restrictive enforcement level produced the most harmful output. This is not an edge case. It is the class of failure CalibrAI is designed to detect.
 
 ---
 
