@@ -46,7 +46,6 @@ export default function Sidebar({
     }}>
       {/* Logo */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-        <span style={{ fontSize: '1.4rem' }}>🛡️</span>
         <div>
           <div style={{ fontWeight: 700, fontSize: '0.95rem', letterSpacing: '-0.02em' }}>CalibrAI</div>
           <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Safety Calibration</div>

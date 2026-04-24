@@ -1,33 +1,38 @@
 /* ── Design tokens ──────────────────────────────────────────────────────── */
 :root {
-  --bg-base:       #080c14;
-  --bg-surface:    #0f1623;
-  --bg-elevated:   #161f30;
-  --bg-card:       #1a2540;
-  --bg-input:      #111827;
-  --border:        #243047;
-  --border-bright: #334466;
+  --bg-base:       #060912;
+  --bg-surface:    #0c1120;
+  --bg-elevated:   #131c2e;
+  --bg-card:       #161f32;
+  --bg-input:      #0f1727;
+  --border:        #1e2d47;
+  --border-bright: #2a3f60;
 
-  --text-primary:  #e2e8f0;
-  --text-secondary:#94a3b8;
-  --text-muted:    #546282;
+  --text-primary:  #e8edf5;
+  --text-secondary:#8a9bbf;
+  --text-muted:    #4a5878;
 
-  --accent:        #3b82f6;
-  --accent-hover:  #2563eb;
-  --green:         #10b981;
-  --green-dim:     #064e3b;
-  --red:           #ef4444;
-  --red-dim:       #450a0a;
-  --yellow:        #f59e0b;
-  --yellow-dim:    #451a03;
-  --purple:        #8b5cf6;
+  --accent:        #4f8ef7;
+  --accent-hover:  #2d6ee0;
+  --accent-glow:   rgba(79,142,247,0.25);
+  --green:         #22d374;
+  --green-dim:     #052e18;
+  --red:           #f05464;
+  --red-dim:       #2d0a10;
+  --yellow:        #f5b944;
+  --yellow-dim:    #2e1d04;
+  --purple:        #a175f7;
 
   --radius-sm:     4px;
   --radius:        8px;
   --radius-lg:     12px;
+  --radius-xl:     16px;
 
   --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', ui-monospace, monospace;
   --font-sans: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+
+  --shadow-card: 0 4px 24px rgba(0,0,0,0.4), 0 1px 2px rgba(0,0,0,0.3);
+  --shadow-glow: 0 0 40px rgba(79,142,247,0.12);
 }
 
 /* ── Reset ──────────────────────────────────────────────────────────────── */
@@ -61,15 +66,28 @@ h2 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.01em; }
 h3 { font-size: 1rem;    font-weight: 600; }
 h4 { font-size: 0.875rem; font-weight: 500; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.06em; }
 
+/* ── Gradient text ──────────────────────────────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, #e8edf5 0%, #4f8ef7 60%, #a175f7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 /* ── Layout atoms ───────────────────────────────────────────────────────── */
 .card {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   padding: 20px;
+  box-shadow: var(--shadow-card);
 }
 
 .card-sm { padding: 14px 16px; }
+
+.card-glow {
+  box-shadow: var(--shadow-card), var(--shadow-glow);
+}
 
 .section-label {
   font-size: 0.7rem;
@@ -94,10 +112,16 @@ button { cursor: pointer; font-family: inherit; border: none; outline: none; tra
 }
 
 .btn-primary {
-  background: var(--accent);
+  background: linear-gradient(135deg, var(--accent), #6366f1);
   color: #fff;
+  box-shadow: 0 2px 12px rgba(79,142,247,0.3);
 }
-.btn-primary:hover:not(:disabled) { background: var(--accent-hover); }
+.btn-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, var(--accent-hover), #4f46e5);
+  box-shadow: 0 4px 20px rgba(79,142,247,0.45);
+  transform: translateY(-1px);
+}
+.btn-primary:active:not(:disabled) { transform: translateY(0); }
 .btn-primary:disabled { opacity: 0.45; cursor: not-allowed; }
 
 .btn-ghost {
@@ -128,13 +152,13 @@ button { cursor: pointer; font-family: inherit; border: none; outline: none; tra
   font-size: 0.9rem;
   padding: 10px 12px;
   outline: none;
-  transition: border-color 0.15s;
+  transition: border-color 0.15s, box-shadow 0.15s;
   appearance: none;
 }
 
 .input:focus, .select:focus, textarea:focus {
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
+  box-shadow: 0 0 0 3px rgba(79,142,247,0.15);
 }
 
 .input::placeholder { color: var(--text-muted); }
@@ -164,10 +188,10 @@ button { cursor: pointer; font-family: inherit; border: none; outline: none; tra
   font-weight: 600;
   letter-spacing: 0.03em;
 }
-.badge-green  { background: var(--green-dim);  color: var(--green);  }
-.badge-red    { background: var(--red-dim);    color: var(--red);    }
-.badge-yellow { background: var(--yellow-dim); color: var(--yellow); }
-.badge-blue   { background: rgba(59,130,246,.12); color: var(--accent); }
+.badge-green  { background: rgba(34,211,116,0.12);  color: var(--green);  border: 1px solid rgba(34,211,116,0.2); }
+.badge-red    { background: rgba(240,84,100,0.12);  color: var(--red);    border: 1px solid rgba(240,84,100,0.2); }
+.badge-yellow { background: rgba(245,185,68,0.12);  color: var(--yellow); border: 1px solid rgba(245,185,68,0.2); }
+.badge-blue   { background: rgba(79,142,247,0.12);  color: var(--accent); border: 1px solid rgba(79,142,247,0.2); }
 .badge-ghost  { background: var(--bg-elevated); color: var(--text-secondary); border: 1px solid var(--border); }
 
 /* ── Progress bar ───────────────────────────────────────────────────────── */
@@ -183,17 +207,34 @@ button { cursor: pointer; font-family: inherit; border: none; outline: none; tra
   background: linear-gradient(90deg, var(--accent), var(--purple));
   border-radius: 2px;
   transition: width 0.3s ease;
+  box-shadow: 0 0 8px rgba(79,142,247,0.6);
 }
 
 /* ── Status dot ─────────────────────────────────────────────────────────── */
 .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
-.dot-green  { background: var(--green);  box-shadow: 0 0 6px var(--green); }
-.dot-red    { background: var(--red);    box-shadow: 0 0 6px var(--red); }
-.dot-yellow { background: var(--yellow); box-shadow: 0 0 6px var(--yellow); animation: pulse 2s infinite; }
+.dot-green  { background: var(--green);  box-shadow: 0 0 8px var(--green); }
+.dot-red    { background: var(--red);    box-shadow: 0 0 8px var(--red); }
+.dot-yellow { background: var(--yellow); box-shadow: 0 0 8px var(--yellow); animation: pulse 2s infinite; }
 
 @keyframes pulse {
   0%, 100% { opacity: 1; }
   50%       { opacity: 0.4; }
+}
+
+/* ── Grid background ────────────────────────────────────────────────────── */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(79,142,247,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(79,142,247,0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* ── Glow orb ───────────────────────────────────────────────────────────── */
+.glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
 }
 
 /* ── Utility ────────────────────────────────────────────────────────────── */

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CalibrAI Theme Options</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #111; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; padding: 32px; }
+    h1 { color: #fff; font-size: 1rem; font-weight: 500; margin-bottom: 24px; opacity: 0.5; letter-spacing: 0.05em; text-transform: uppercase; }
+    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+
+    .theme { border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); }
+    .theme-label { padding: 10px 16px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .theme-body { padding: 20px; display: flex; flex-direction: column; gap: 12px; }
+
+    /* Mini UI mock */
+    .mock-header { font-size: 1.1rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 2px; }
+    .mock-sub { font-size: 0.72rem; opacity: 0.45; margin-bottom: 8px; }
+    .mock-card { border-radius: 8px; padding: 12px 14px; border: 1px solid; }
+    .mock-label { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; opacity: 0.5; }
+    .mock-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+    .mock-chip { font-size: 0.7rem; padding: 4px 10px; border-radius: 5px; border: 1px solid; font-weight: 500; }
+    .mock-chip.active { font-weight: 700; }
+    .mock-btn { border-radius: 7px; padding: 9px 18px; font-size: 0.8rem; font-weight: 600; border: none; cursor: default; margin-top: 4px; width: 100%; }
+    .mock-row { display: flex; gap: 8px; }
+    .mock-stat { flex: 1; border-radius: 6px; padding: 8px 10px; border: 1px solid; }
+    .mock-stat-val { font-size: 0.95rem; font-weight: 700; margin-bottom: 2px; }
+    .mock-stat-key { font-size: 0.6rem; opacity: 0.4; text-transform: uppercase; letter-spacing: 0.06em; }
+
+    /* ── THEME A: Warm Amber / Slate ── */
+    .theme-a { background: #0f0d0b; }
+    .theme-a .theme-label { background: #1a1510; color: #c8974a; }
+    .theme-a .mock-header { color: #f0e6d3; }
+    .theme-a .mock-sub { color: #f0e6d3; }
+    .theme-a .mock-card { background: #1a1510; border-color: #2e2418; }
+    .theme-a .mock-label { color: #f0e6d3; }
+    .theme-a .mock-chip { background: #1f1a12; border-color: #2e2418; color: #9a8878; }
+    .theme-a .mock-chip.active { background: rgba(200,151,74,0.15); border-color: rgba(200,151,74,0.4); color: #c8974a; }
+    .theme-a .mock-btn { background: #c8974a; color: #0f0d0b; }
+    .theme-a .mock-stat { background: #1a1510; border-color: #2e2418; }
+    .theme-a .mock-stat-val { color: #c8974a; }
+    .theme-a .mock-stat-key { color: #f0e6d3; }
+
+    /* ── THEME B: Terminal Green ── */
+    .theme-b { background: #080e08; }
+    .theme-b .theme-label { background: #0c140c; color: #22c55e; }
+    .theme-b .mock-header { color: #d4f5d4; }
+    .theme-b .mock-sub { color: #d4f5d4; }
+    .theme-b .mock-card { background: #0c140c; border-color: #163016; }
+    .theme-b .mock-label { color: #d4f5d4; }
+    .theme-b .mock-chip { background: #0e180e; border-color: #163016; color: #4a7a4a; }
+    .theme-b .mock-chip.active { background: rgba(34,197,94,0.12); border-color: rgba(34,197,94,0.35); color: #22c55e; }
+    .theme-b .mock-btn { background: #22c55e; color: #080e08; }
+    .theme-b .mock-stat { background: #0c140c; border-color: #163016; }
+    .theme-b .mock-stat-val { color: #22c55e; }
+    .theme-b .mock-stat-key { color: #d4f5d4; }
+
+    /* ── THEME C: Monochrome + Red ── */
+    .theme-c { background: #0a0a0a; }
+    .theme-c .theme-label { background: #111; color: #f03e3e; }
+    .theme-c .mock-header { color: #f0f0f0; }
+    .theme-c .mock-sub { color: #f0f0f0; }
+    .theme-c .mock-card { background: #141414; border-color: #222; }
+    .theme-c .mock-label { color: #f0f0f0; }
+    .theme-c .mock-chip { background: #1a1a1a; border-color: #282828; color: #666; }
+    .theme-c .mock-chip.active { background: rgba(240,62,62,0.12); border-color: rgba(240,62,62,0.35); color: #f03e3e; }
+    .theme-c .mock-btn { background: #f03e3e; color: #fff; }
+    .theme-c .mock-stat { background: #141414; border-color: #222; }
+    .theme-c .mock-stat-val { color: #f03e3e; }
+    .theme-c .mock-stat-key { color: #f0f0f0; }
+
+    /* ── THEME D: Teal / Slate ── */
+    .theme-d { background: #080c0e; }
+    .theme-d .theme-label { background: #0c1316; color: #14b8c8; }
+    .theme-d .mock-header { color: #d0edf0; }
+    .theme-d .mock-sub { color: #d0edf0; }
+    .theme-d .mock-card { background: #0c1316; border-color: #162228; }
+    .theme-d .mock-label { color: #d0edf0; }
+    .theme-d .mock-chip { background: #0e1a1e; border-color: #162228; color: #406070; }
+    .theme-d .mock-chip.active { background: rgba(20,184,200,0.12); border-color: rgba(20,184,200,0.35); color: #14b8c8; }
+    .theme-d .mock-btn { background: #14b8c8; color: #080c0e; }
+    .theme-d .mock-stat { background: #0c1316; border-color: #162228; }
+    .theme-d .mock-stat-val { color: #14b8c8; }
+    .theme-d .mock-stat-key { color: #d0edf0; }
+  </style>
+</head>
+<body>
+  <h1>CalibrAI — Theme Options</h1>
+  <div class="grid">
+
+    <!-- A: Warm Amber -->
+    <div class="theme theme-a">
+      <div class="theme-label">A — Warm Amber / Slate</div>
+      <div class="theme-body">
+        <div>
+          <div class="mock-header">CalibrAI</div>
+          <div class="mock-sub">Governance-aligned LLM safety calibration</div>
+        </div>
+        <div class="mock-card">
+          <div class="mock-label">01 — Industry</div>
+          <div class="mock-chips">
+            <span class="mock-chip active">Banking</span>
+            <span class="mock-chip">Healthcare</span>
+            <span class="mock-chip">Legal</span>
+            <span class="mock-chip">Tech</span>
+          </div>
+        </div>
+        <div class="mock-row">
+          <div class="mock-stat"><div class="mock-stat-val">$12,400</div><div class="mock-stat-key">FP Cost / Week</div></div>
+          <div class="mock-stat"><div class="mock-stat-val">L2</div><div class="mock-stat-key">Recommended</div></div>
+        </div>
+        <button class="mock-btn">Calculate Threshold →</button>
+      </div>
+    </div>
+
+    <!-- B: Terminal Green -->
+    <div class="theme theme-b">
+      <div class="theme-label">B — Terminal Green</div>
+      <div class="theme-body">
+        <div>
+          <div class="mock-header">CalibrAI</div>
+          <div class="mock-sub">Governance-aligned LLM safety calibration</div>
+        </div>
+        <div class="mock-card">
+          <div class="mock-label">01 — Industry</div>
+          <div class="mock-chips">
+            <span class="mock-chip active">Banking</span>
+            <span class="mock-chip">Healthcare</span>
+            <span class="mock-chip">Legal</span>
+            <span class="mock-chip">Tech</span>
+          </div>
+        </div>
+        <div class="mock-row">
+          <div class="mock-stat"><div class="mock-stat-val">$12,400</div><div class="mock-stat-key">FP Cost / Week</div></div>
+          <div class="mock-stat"><div class="mock-stat-val">L2</div><div class="mock-stat-key">Recommended</div></div>
+        </div>
+        <button class="mock-btn">Calculate Threshold →</button>
+      </div>
+    </div>
+
+    <!-- C: Monochrome + Red -->
+    <div class="theme theme-c">
+      <div class="theme-label">C — Monochrome + Red</div>
+      <div class="theme-body">
+        <div>
+          <div class="mock-header">CalibrAI</div>
+          <div class="mock-sub">Governance-aligned LLM safety calibration</div>
+        </div>
+        <div class="mock-card">
+          <div class="mock-label">01 — Industry</div>
+          <div class="mock-chips">
+            <span class="mock-chip active">Banking</span>
+            <span class="mock-chip">Healthcare</span>
+            <span class="mock-chip">Legal</span>
+            <span class="mock-chip">Tech</span>
+          </div>
+        </div>
+        <div class="mock-row">
+          <div class="mock-stat"><div class="mock-stat-val">$12,400</div><div class="mock-stat-key">FP Cost / Week</div></div>
+          <div class="mock-stat"><div class="mock-stat-val">L2</div><div class="mock-stat-key">Recommended</div></div>
+        </div>
+        <button class="mock-btn">Calculate Threshold →</button>
+      </div>
+    </div>
+
+    <!-- D: Teal -->
+    <div class="theme theme-d">
+      <div class="theme-label">D — Cool Teal / Slate</div>
+      <div class="theme-body">
+        <div>
+          <div class="mock-header">CalibrAI</div>
+          <div class="mock-sub">Governance-aligned LLM safety calibration</div>
+        </div>
+        <div class="mock-card">
+          <div class="mock-label">01 — Industry</div>
+          <div class="mock-chips">
+            <span class="mock-chip active">Banking</span>
+            <span class="mock-chip">Healthcare</span>
+            <span class="mock-chip">Legal</span>
+            <span class="mock-chip">Tech</span>
+          </div>
+        </div>
+        <div class="mock-row">
+          <div class="mock-stat"><div class="mock-stat-val">$12,400</div><div class="mock-stat-key">FP Cost / Week</div></div>
+          <div class="mock-stat"><div class="mock-stat-val">L2</div><div class="mock-stat-key">Recommended</div></div>
+        </div>
+        <button class="mock-btn">Calculate Threshold →</button>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
